@@ -8,7 +8,7 @@ export const AppDataSource = new DataSource({
     username: "blog",
     password: "",
     database: "blog_development",
-    synchronize: true,
+    synchronize: false,//如果是true，会把代码里面的东西同步到数据库，会有危险
     logging: false,
     entities: [],
     migrations: [],
