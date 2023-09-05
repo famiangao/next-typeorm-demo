@@ -1,5 +1,4 @@
 import { AppDataSource } from "./data-source"
-import { User } from "./entity/User"
 
 AppDataSource.initialize().then(async () => {
     ///之前连接之后会返回一个connection对象，现在那个对象变成了AppDataSource对象
