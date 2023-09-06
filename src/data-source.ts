@@ -10,7 +10,7 @@ export const AppDataSource = new DataSource({
     database: "blog_development",
     synchronize: false,//如果是true，会把代码里面的东西同步到数据库，会有危险
     logging: false,
-    entities: [],
-    migrations: [],
-    subscribers: [],
+    entities: ['dist/entity/**/*.js'],
+    migrations: ['dist/migration/**/*.js'],
+    subscribers: ['dist/subscriber/**/*.js'],
 })
