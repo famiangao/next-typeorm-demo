@@ -16,11 +16,11 @@ export class Comment {
     @PrimaryGeneratedColumn("increment")
     id:number;
 
-    // @Column("int")
-    // author_id:number;
-    //
-    // @Column("int")
-    // post_id:number;
+    @Column("int")
+    author_id:number;
+
+    @Column("int")
+    post_id:number;
 
     @Column("text")
     content:string;
@@ -31,13 +31,13 @@ export class Comment {
     @UpdateDateColumn()
     updatedAt:Date;
 
-    @ManyToOne(()=>User,user=>user.comments)
-    @JoinColumn({name:"author_id"})
-    author:User;
-
-    @ManyToOne(()=>Post,post=>post.comments)
-    @JoinColumn({name:"post_id"})
-    post:Post;
+    // @ManyToOne(()=>User,user=>user.comments)
+    // @JoinColumn({name:"author_id"})
+    // author:User;
+    //
+    // @ManyToOne(()=>Post,post=>post.comments)
+    // @JoinColumn({name:"post_id"})
+    // post:Post;
 
     constructor(content:string,author:User,post:Post) {
         this.content=content;

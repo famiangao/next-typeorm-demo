@@ -19,11 +19,11 @@ export class User {
     @UpdateDateColumn()
     updatedAt:Date;
 
-    @OneToMany(()=>Post,post=>post.author)
-    posts:Post[]
+    // @OneToMany(()=>Post,post=>post.author)
+    // posts:Post[]
 
-    @OneToMany(()=>Comment,comment=>comment.author)
-    comments:Comment[]
+    // @OneToMany(()=>Comment,comment=>comment.author)
+    // comments:Comment[]
 
     constructor(username:string,password:string,) {
         this.username=username;
