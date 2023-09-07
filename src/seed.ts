@@ -1,19 +1,19 @@
 import {AppDataSource} from "./data-source";
+import {User} from "./entity/User";
 import {Post} from "./entity/Post";
-async function main(){
-    console.log("运行了函数",AppDataSource.isInitialized)
-    AppDataSource.isInitialized|| (await AppDataSource.initialize());///创建与数据库的连接，作用等同于AppDataSource.connect();
-    // await AppDataSource.connect();
-    const content=await AppDataSource.manager.find(Post);
-    console.log(content);
-    if(content.length===0){
-        await AppDataSource.manager.save([1,2,3,4,5,6,7,8,9,10].map(el=>{
-            return new Post(`第${el}篇内容`,`这是第${el}篇的内容`)
-        }))
-    }
-    console.log(await AppDataSource.manager.find(Post))
-    await AppDataSource.destroy();//销毁连接
-}
-main().then(()=>[
+AppDataSource.initialize().then(async ()=>{
+    let david=new User("david","12321");
+    // let sophie=new User("sophie","12121")
+    let onePost=new Post("这是标题1","这是内容1")
+    let twoPost=new Post("这是标题2","这是内容2")
+    onePost.author=david;
+    twoPost.author=david;
 
-])
+    await AppDataSource.manager.save(david);
+    await AppDataSource.manager.save(onePost);
+    await AppDataSource.manager.save(twoPost);
+    console.log(await AppDataSource.manager.find(User))
+
+    await AppDataSource.destroy();//销毁连接
+
+})

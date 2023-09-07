@@ -3,24 +3,24 @@ import {
     CreateDateColumn,
     Entity,
     JoinColumn,
-    ManyToOne, OneToMany,
+    ManyToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm"
 import {User} from "./User";
-import {Comment} from "./Comment";
+import {Post} from "./Post";
 
-//posts表的描述文件
-@Entity('posts')
-export class Post {
+@Entity()
+export class Comment {
+
     @PrimaryGeneratedColumn("increment")
     id:number;
 
     // @Column("int")
     // author_id:number;
-
-    @Column("varchar")
-    title:string;
+    //
+    // @Column("int")
+    // post_id:number;
 
     @Column("text")
     content:string;
@@ -31,15 +31,11 @@ export class Post {
     @UpdateDateColumn()
     updatedAt:Date;
 
-    @ManyToOne(()=>User,user=>user.posts)
+    @ManyToOne(()=>User,user=>user.comments)
     @JoinColumn({name:"author_id"})
     author:User;
 
-    @OneToMany(()=>Comment,comment=>comment.post)
-    comments:Comment[]
-
-    constructor(title:string,content:string) {
-        this.title=title;
-        this.content=content;
-    }
+    @ManyToOne(()=>Post,post=>post.comments)
+    @JoinColumn({name:"post_id"})
+    post:User;
 }
