@@ -10,7 +10,7 @@ import {
 import {User} from "./User";
 import {Post} from "./Post";
 
-@Entity()
+@Entity('comments')
 export class Comment {
 
     @PrimaryGeneratedColumn("increment")
@@ -37,5 +37,11 @@ export class Comment {
 
     @ManyToOne(()=>Post,post=>post.comments)
     @JoinColumn({name:"post_id"})
-    post:User;
+    post:Post;
+
+    constructor(content:string,author:User,post:Post) {
+        this.content=content;
+        this.author=author;
+        this.post=post;
+    }
 }
