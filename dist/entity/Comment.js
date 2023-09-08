@@ -12,24 +12,36 @@ var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/de
 var _applyDecoratedDescriptor2 = _interopRequireDefault(require("@babel/runtime/helpers/applyDecoratedDescriptor"));
 var _initializerWarningHelper2 = _interopRequireDefault(require("@babel/runtime/helpers/initializerWarningHelper"));
 var _typeorm = require("typeorm");
-var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6;
-var Comment = (_dec = (0, _typeorm.Entity)('comments'), _dec2 = (0, _typeorm.PrimaryGeneratedColumn)("increment"), _dec3 = (0, _typeorm.Column)("int"), _dec4 = (0, _typeorm.Column)("int"), _dec5 = (0, _typeorm.Column)("text"), _dec6 = (0, _typeorm.CreateDateColumn)(), _dec7 = (0, _typeorm.UpdateDateColumn)(), _dec(_class = (_class2 = /*#__PURE__*/(0, _createClass2["default"])(
-// @ManyToOne(()=>User,user=>user.comments)
-// @JoinColumn({name:"author_id"})
-// author:User;
+var _User = require("./User");
+var _Post = require("./Post");
+var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6;
+var Comment = (_dec = (0, _typeorm.Entity)('comments'), _dec2 = (0, _typeorm.PrimaryGeneratedColumn)("increment"), _dec3 = (0, _typeorm.Column)("text"), _dec4 = (0, _typeorm.CreateDateColumn)(), _dec5 = (0, _typeorm.UpdateDateColumn)(), _dec6 = (0, _typeorm.ManyToOne)(function () {
+  return _User.User;
+}, function (user) {
+  return user.comments;
+}), _dec7 = (0, _typeorm.JoinColumn)({
+  name: "author_id"
+}), _dec8 = (0, _typeorm.ManyToOne)(function () {
+  return _Post.Post;
+}, function (post) {
+  return post.comments;
+}), _dec9 = (0, _typeorm.JoinColumn)({
+  name: "post_id"
+}), _dec(_class = (_class2 = /*#__PURE__*/(0, _createClass2["default"])(
+// @Column("int")
+// author_id:number;
 //
-// @ManyToOne(()=>Post,post=>post.comments)
-// @JoinColumn({name:"post_id"})
-// post:Post;
+// @Column("int")
+// post_id:number;
 
 function Comment(content, author, post) {
   (0, _classCallCheck2["default"])(this, Comment);
   (0, _initializerDefineProperty2["default"])(this, "id", _descriptor, this);
-  (0, _initializerDefineProperty2["default"])(this, "author_id", _descriptor2, this);
-  (0, _initializerDefineProperty2["default"])(this, "post_id", _descriptor3, this);
-  (0, _initializerDefineProperty2["default"])(this, "content", _descriptor4, this);
-  (0, _initializerDefineProperty2["default"])(this, "createdAt", _descriptor5, this);
-  (0, _initializerDefineProperty2["default"])(this, "updatedAt", _descriptor6, this);
+  (0, _initializerDefineProperty2["default"])(this, "content", _descriptor2, this);
+  (0, _initializerDefineProperty2["default"])(this, "createdAt", _descriptor3, this);
+  (0, _initializerDefineProperty2["default"])(this, "updatedAt", _descriptor4, this);
+  (0, _initializerDefineProperty2["default"])(this, "author", _descriptor5, this);
+  (0, _initializerDefineProperty2["default"])(this, "post", _descriptor6, this);
   this.content = content;
   this.author = author;
   this.post = post;
@@ -38,27 +50,27 @@ function Comment(content, author, post) {
   enumerable: true,
   writable: true,
   initializer: null
-}), _descriptor2 = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "author_id", [_dec3], {
+}), _descriptor2 = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "content", [_dec3], {
   configurable: true,
   enumerable: true,
   writable: true,
   initializer: null
-}), _descriptor3 = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "post_id", [_dec4], {
+}), _descriptor3 = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "createdAt", [_dec4], {
   configurable: true,
   enumerable: true,
   writable: true,
   initializer: null
-}), _descriptor4 = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "content", [_dec5], {
+}), _descriptor4 = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "updatedAt", [_dec5], {
   configurable: true,
   enumerable: true,
   writable: true,
   initializer: null
-}), _descriptor5 = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "createdAt", [_dec6], {
+}), _descriptor5 = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "author", [_dec6, _dec7], {
   configurable: true,
   enumerable: true,
   writable: true,
   initializer: null
-}), _descriptor6 = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "updatedAt", [_dec7], {
+}), _descriptor6 = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "post", [_dec8, _dec9], {
   configurable: true,
   enumerable: true,
   writable: true,

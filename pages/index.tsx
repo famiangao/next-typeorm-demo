@@ -3,6 +3,7 @@ import {NextPage} from "next";
 import {Post} from "../src/entity/Post";
 import {AppDataSource, dataSourceConfig} from "../src/data-source";
 import {createConnection} from "typeorm/browser";
+import {connectionDatabase} from "../lib/handleDatabaseConnection";
 //import usePosts from "../hooks/usePosts";//这个方法是从axios内渲染出来的内容
 
 type IHomeProp = {
@@ -15,7 +16,7 @@ const Home: NextPage<IHomeProp> = (props) => {
     // console.log("这是内容",props)
     return (
         <main>
-            <div>aaa</div>
+            <div>文章标题</div>
             <div>
                 {
                     posts.map((el) => {
@@ -38,14 +39,9 @@ const Home: NextPage<IHomeProp> = (props) => {
 ///因为next的东西是约定大于配置，所以你只要写了getStaticProps就默认是这个页面的ssg了
 export const getStaticProps = async () => {
     // const posts:IPosts[]=await getPosts();
-    // AppDataSource.setOptions({
-    //     ...dataSourceConfig,
-    //     entities:[Post]
-    // })
+    await connectionDatabase();
     let posts: Post[] = [];
-    await AppDataSource.initialize();
     posts = JSON.parse(JSON.stringify(await AppDataSource.manager.find(Post)));
-
     return {
         props: {
             posts
