@@ -1,11 +1,14 @@
-import {NextPage} from "next";
+import {GetServerSideProps, NextPage} from "next";
 import {useState} from "react";
 import {IErrors} from "../src/model/SignIn";
 import axios, {AxiosError} from "axios";
-import {Simulate} from "react-dom/test-utils";
 import {User} from "../src/entity/User";
+import {NextApiRequestSession} from "../types/base";
+import {withSession} from "../lib/withSession";
 
-type IProps = {}
+type IProps = {
+    user:User
+}
 export type IFormMsg = {
     name: string,
     password: string,
@@ -30,7 +33,9 @@ const signUp: NextPage<IProps> = (props) => {
     }
     return (
         <div>
-            <div>{user.username}</div>
+            {/*<div>{user.username}</div>*/}
+            <div>用户名</div>
+            <div>{props.user?.username}</div>
             <h1>登录</h1>
             <div>
                 <label>
@@ -65,5 +70,17 @@ const signUp: NextPage<IProps> = (props) => {
         </div>
     )
 }
+
+export const getServerSideProps:GetServerSideProps=withSession(async (context)=>{
+    //@ts-ignore
+    const user = context.req.session.get('currentUser');
+    console.log(user)
+    // console.log(context)
+    return {
+        props:{
+            user:user
+        }
+    }
+})
 
 export default signUp;
