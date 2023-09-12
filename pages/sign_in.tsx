@@ -1,35 +1,37 @@
 import {NextPage} from "next";
 import {useState} from "react";
-import axios, {AxiosError, AxiosResponse} from "axios";
-import {IErrors} from "./api/v1/users";
+import {IErrors} from "../src/model/SignIn";
+import axios, {AxiosError} from "axios";
+import {Simulate} from "react-dom/test-utils";
+import {User} from "../src/entity/User";
 
 type IProps = {}
 export type IFormMsg = {
     name: string,
     password: string,
-    passwordConfirmation: string
 }
 const signUp: NextPage<IProps> = (props) => {
     let [formData, setFormData] = useState<IFormMsg>({
         name: "",
         password: "",
-        passwordConfirmation: ""
     })
-    let [errors,setErrors]=useState<IErrors>({password: [], passwordConfirmation: [], username: []})
+    let [errors,setErrors]=useState<IErrors>({password: [] ,username: []})
+    let [user,setUser]=useState<any>({})
     const onSubmit = async () => {
         //点击确定要做的事儿是发送ajax，ajax肯定没办法静态化
-        axios.post("/api/v1/users", formData)
-            .then((res:AxiosResponse) => {
-                //如果成功的话判断跳转成功界面
-                alert("注册成功")
-                window.location.href="/sign_in"
-            }).catch((error:AxiosError<IErrors>) => {
-            setErrors(error.response.data)
+        //点击后需要验证是否合规，是否有错，然后返回数据
+        axios.post("/api/v1/sessions",formData).then((res)=>{
+            alert("登录成功")
+            console.log(res.data);
+            setUser(res.data)
+        }).catch((error:AxiosError<IErrors>)=>{
+            setErrors(error.request)
         })
     }
     return (
         <div>
-            <h1>注册</h1>
+            <div>{user.username}</div>
+            <h1>登录</h1>
             <div>
                 <label>
                     用户名
@@ -56,21 +58,6 @@ const signUp: NextPage<IProps> = (props) => {
                     }/>
                 </label>
                 <div>{errors.password.length!==0&&errors.password.join(" ")}</div>
-            </div>
-
-            <div>
-                <label>
-                    确定密码
-                    <input type="password" onChange={(event) => {
-                        setFormData({
-                            ...formData,
-                            passwordConfirmation: event.target.value
-                        })
-                    }
-                    }/>
-                </label>
-                <div>{errors.passwordConfirmation.length!==0&&errors.passwordConfirmation.join(" ")}</div>
-
             </div>
             <div>
                 <button onClick={onSubmit}>确定</button>

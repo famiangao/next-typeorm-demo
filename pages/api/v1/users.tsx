@@ -15,9 +15,7 @@ const Users: NextApiHandler = async (req, res) => {
     //你要先验证请求是否合规
     let {name, password, passwordConfirmation} = req.body as IFormMsg;
     await connectionDatabase();
-    console.log("1")
     let user=new User(name,password);
-    console.log("2")
     user.password=password;
     user.passwordConfirmation=passwordConfirmation;
 
