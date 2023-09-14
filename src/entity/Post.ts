@@ -41,6 +41,6 @@ export class Post {
     constructor(title:string,content:string,author:User) {
         this.title=title;
         this.content=content;
-        // this.author=author;
+        this.author=author;
     }
 }

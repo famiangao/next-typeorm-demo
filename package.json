@@ -26,6 +26,7 @@
     "react-dom": "18.2.0",
     "reflect-metadata": "^0.1.13",
     "sass": "^1.66.1",
+    "scss": "^0.2.4",
     "typeorm": "^0.3.17",
     "typescript": "5.2.2"
   },

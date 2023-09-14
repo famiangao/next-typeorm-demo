@@ -6,6 +6,9 @@ npm run dev
 ```
 
 ## 知识点
+
+### 运行项目
+
 我的docker容器名为next-postgres-container，大家要换成自己的
 
 创建容器
@@ -35,3 +38,27 @@ sql命令
  \h                  //查看SQL命令的解释，比如\h select。
  \?                  // 查看psql命令列表。
 ```
+
+### js知识 
+
+获取当前页面的查询参数(查询参数是 url？后面的内容，用于传递当前页面的额外信息，以键值对的形式出现，参数之间用&分隔)
+````
+let searchParams=new URLSearchParams(window.location.search)
+console.log(searchParams.get("back"));
+````
+
+window.location下的内容
+````
+window.location.href    ///完整url   http://localhost:3000/sign_in?back=/posts/new
+
+window.location.pathname  //当前的地址  /sign_in
+
+window.location.search    //查询参数    ?back=/posts/new
+
+````
+
+页面跳转
+````
+window.location.href=`/sign_in?back=${window.location.pathname}`   
+///用半路径的方式，浏览器会自动拼接当前的域名和端口号
+````

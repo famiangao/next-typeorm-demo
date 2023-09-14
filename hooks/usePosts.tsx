@@ -1,7 +1,7 @@
 ///这个东西的内容就是通过请求的方式获取链接  api/v1/posts 中的内容
 ///这是一个hooks，用到了useEffect方法
 import {useEffect, useState} from "react";
-import axios from 'axios';
+import axios from '../lib/axios';
 
 
 ///因为next是渲染在同一个服务器内的，所以这是通过axios的方式获取到的数据

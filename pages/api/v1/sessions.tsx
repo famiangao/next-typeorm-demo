@@ -7,7 +7,7 @@ import {NextApiRequestSession} from "../../../types/base";
 const Sessions:NextApiHandler=async (req:NextApiRequestSession, res)=>{
     console.log(req.body);
     let content=req.body as IFormMsg;
-    let signIn=new SignIn(content.name,content.password)
+    let signIn=new SignIn(content.username,content.password)
     res.setHeader("Content-Type","application/json;charset=utf-8");
     await signIn.validate();
     if(signIn.hasError()){

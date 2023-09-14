@@ -13,9 +13,9 @@ const Users: NextApiHandler = async (req, res) => {
     console.log("0000000")
     // console.log(req.body)//body内塞的就是请求的内容，请求完内容返回
     //你要先验证请求是否合规
-    let {name, password, passwordConfirmation} = req.body as IFormMsg;
+    let {username, password, passwordConfirmation} = req.body as IFormMsg;
     await connectionDatabase();
-    let user=new User(name,password);
+    let user=new User(username,password);
     user.password=password;
     user.passwordConfirmation=passwordConfirmation;
 
