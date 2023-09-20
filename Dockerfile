@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # 应该是不需要install的，因为你build了
-RUN yarn install
+# RUN yarn install
 
 
 # If you are building your code for production
@@ -16,7 +16,7 @@ RUN yarn install
 # Bundle app source
 COPY . .
 
-RUN npm run build
+RUN npm run docker:build
 # 暴漏端口
 EXPOSE 3000
 # 配置启动命令

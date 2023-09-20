@@ -8,7 +8,6 @@
     "start": "next start",
     "lint": "next lint",
     "docker:build": "npm install && next build" ,
-    "aaa": "npm install",
     "babel": "babel -w ./src --out-dir dist --extensions \".ts,.tsx\"",
     "m:run": "typeorm migration:run --dataSource=./dist/data-source.js",
     "m:revert": "typeorm migration:revert --dataSource=./dist/data-source.js",

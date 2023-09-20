@@ -41,7 +41,7 @@ function Post(title, content, author) {
   (0, _initializerDefineProperty2["default"])(this, "comments", _descriptor7, this);
   this.title = title;
   this.content = content;
-  // this.author=author;
+  this.author = author;
 }), (_descriptor = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "id", [_dec2], {
   configurable: true,
   enumerable: true,
