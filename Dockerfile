@@ -6,11 +6,17 @@ WORKDIR /usr/src/app
 # where available (npm@5+)
 # 用*.json是因为如果用的npm会有俩文件，一个是package*.json一个是package-lock.json
 COPY package*.json ./
-RUN npm install
+
+# 应该是不需要install的，因为你build了
+RUN yarn install
+
+
 # If you are building your code for production
 # RUN npm ci --omit=dev
 # Bundle app source
 COPY . .
+
+RUN npm run build
 # 暴漏端口
 EXPOSE 3000
 # 配置启动命令
