@@ -7,7 +7,7 @@ import {Comment} from "./entity/Comment";
 
 export const dataSourceConfig: DataSourceOptions={
     type: "postgres",
-    host: "localhost",
+    host: "192.168.1.179",
     port: 5432,
     username: "blog",
     password: "",
@@ -21,7 +21,7 @@ export const dataSourceConfig: DataSourceOptions={
 }
 export const dataSourceConfig2: DataSourceOptions={
     type: "postgres",
-    host: "localhost",
+    host: "192.168.1.179",
     port: 5432,
     username: "blog",
     password: "",

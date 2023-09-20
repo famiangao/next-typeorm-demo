@@ -1,8 +1,8 @@
 import {NextApiHandler, NextApiRequest} from "next";
 import {IFormMsg} from "../../sign_in";
 import {SignIn} from "../../../src/model/SignIn";
-import {withSession} from "../../../lib/withSession";
 import {NextApiRequestSession} from "../../../types/base";
+import {withSessionAPI} from "../../../lib/withSession";
 
 const Sessions:NextApiHandler=async (req:NextApiRequestSession, res)=>{
     console.log(req.body);
@@ -15,7 +15,8 @@ const Sessions:NextApiHandler=async (req:NextApiRequestSession, res)=>{
         res.write(JSON.stringify(signIn.errors))
     }else {
         //在这儿要存一个session
-        req.session.set("currentUser",signIn.user);
+        // req.session.set("currentUser",signIn.user);
+        req.session.currentUser=signIn.user
         await  req.session.save();
         res.statusCode=200;
         res.write(JSON.stringify(signIn.user));
@@ -24,4 +25,4 @@ const Sessions:NextApiHandler=async (req:NextApiRequestSession, res)=>{
     res.end();
 }
 
-export default withSession(Sessions);
+export default withSessionAPI(Sessions);

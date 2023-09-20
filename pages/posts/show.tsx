@@ -26,7 +26,7 @@ const Home: NextPage<IHomeProp> = (props) => {
         }
     })
     return (
-        <main>
+        <div>
             <div>文章标题</div>
             <br/>
             <div>
@@ -46,7 +46,7 @@ const Home: NextPage<IHomeProp> = (props) => {
             <div>{
                 pager
             }</div>
-        </main>
+        </div>
     )
 }
 
@@ -56,7 +56,7 @@ export const getServerSideProps: GetServerSideProps = async (context:GetServerSi
 
     //现在页面有一个传参了，page=x。设置一页几个和一共几页
     // console.log(context.query.page);//获取到当前的查询参数
-    const PAGE_COUNT=1;
+    const PAGE_COUNT=3;
     const pageNumber=Number(context.query.page)||1;
     await connectionDatabase();
     let posts=await AppDataSource.manager.findAndCount(Post,{

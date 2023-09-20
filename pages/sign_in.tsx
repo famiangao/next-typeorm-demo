@@ -2,9 +2,8 @@ import {GetServerSideProps, NextPage} from "next";
 import {useEffect, useState} from "react";
 import axios from '../lib/axios';
 import {User} from "../src/entity/User";
-import {NextApiRequestSession} from "../types/base";
-import {withSession} from "../lib/withSession";
 import {useForm} from "../hooks/useForm";
+import {withSessionSSR} from "../lib/withSession";
 
 type IProps = {
     user: User
@@ -53,9 +52,8 @@ const signUp: NextPage<IProps> = (props) => {
     )
 }
 
-export const getServerSideProps: GetServerSideProps = withSession(async (context) => {
-    //@ts-ignore
-    const user = context.req.session.get('currentUser');
+export const getServerSideProps:GetServerSideProps = withSessionSSR(async (context) => {
+    const user = context.req.session.currentUser;
     console.log(user)
     // console.log(context)
     return {

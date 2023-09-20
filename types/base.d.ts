@@ -1,7 +1,14 @@
 import {NextApiRequest} from "next";
-import {Session} from "next-iron-session";
+import {IronSession} from "iron-session";
+import * as IronSession from "iron-session";
+import {User} from "../src/entity/User";
 
+declare module "iron-session" {
+    interface IronSessionData {
+        currentUser?: User;
+    }
+}
 interface NextApiRequestSession extends NextApiRequest{
-    session:Session
+    session:IronSession
 }
 export type {NextApiRequestSession};

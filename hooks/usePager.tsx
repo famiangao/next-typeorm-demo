@@ -1,4 +1,3 @@
-import {spans} from "next/dist/build/webpack/plugins/profiling-plugin";
 
 export interface IOptions {
     maxPage: number,
@@ -34,7 +33,7 @@ export const usePager = (options: IOptions) => {
             }
             {showArr.map(el => {
                 return (
-                    <span>
+                    <span key={el}>
                         {el === -1 ?
                             (<span>...</span>)
                             :
