@@ -38,6 +38,14 @@ sql命令
  \h                  //查看SQL命令的解释，比如\h select。
  \?                  // 查看psql命令列表。
 ```
+### docker 打包
+
+````
+docker build . -t seven/node-web-app  //把当前目录按照Dockerfile打包
+docker run -p 3000:3000 -d seven/node-web-app  //根据镜像启动一个容器
+
+````
+
 
 ### js知识 
 
