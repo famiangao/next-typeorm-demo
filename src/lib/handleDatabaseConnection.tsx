@@ -1,5 +1,5 @@
-import {AppDataSource, dataSourceConfig} from "src/data-source"
-import { Post } from "src/entity/Post"
+import {AppDataSource, dataSourceConfig} from "../data-source"
+import { Post } from "../entity/Post"
 import {User} from "../entity/User";
 import {Comment} from "../entity/Comment";
 

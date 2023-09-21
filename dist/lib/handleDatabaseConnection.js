@@ -8,8 +8,8 @@ exports.connectionDatabase = exports.closeDatabase = void 0;
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
-var _dataSource = require("src/data-source");
-var _Post = require("src/entity/Post");
+var _dataSource = require("../data-source");
+var _Post = require("../entity/Post");
 var _User = require("../entity/User");
 var _Comment = require("../entity/Comment");
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
