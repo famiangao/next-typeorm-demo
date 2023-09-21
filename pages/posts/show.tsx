@@ -3,7 +3,7 @@ import {GetServerSideProps, GetServerSidePropsContext, NextPage} from "next";
 import {Post} from "../../src/entity/Post";
 import {AppDataSource, dataSourceConfig} from "../../src/data-source";
 import {createConnection} from "typeorm/browser";
-import {connectionDatabase} from "../../lib/handleDatabaseConnection";
+import {connectionDatabase} from "../../src/lib/handleDatabaseConnection";
 import {usePager} from "../../hooks/usePager";
 //import usePosts from "../hooks/usePosts";//这个方法是从axios内渲染出来的内容
 

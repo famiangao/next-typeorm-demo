@@ -13,7 +13,7 @@ var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/de
 var _User = require("../entity/User");
 var _dataSource = require("../data-source");
 var _md = _interopRequireDefault(require("md5"));
-var _handleDatabaseConnection = require("../../lib/handleDatabaseConnection");
+var _handleDatabaseConnection = require("../lib/handleDatabaseConnection");
 var SignIn = /*#__PURE__*/function () {
   // userName:string;
   // password:string;

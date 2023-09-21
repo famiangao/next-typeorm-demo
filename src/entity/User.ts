@@ -10,7 +10,7 @@ import {
 import { Post } from "./Post";
 import {Comment} from "./Comment";
 import {IErrors} from "../../pages/api/v1/users";
-import {connectionDatabase} from "../../lib/handleDatabaseConnection";
+import {connectionDatabase} from "../lib/handleDatabaseConnection";
 import md5 from 'md5';
 import _ from 'lodash';
 import {AppDataSource} from "../data-source";

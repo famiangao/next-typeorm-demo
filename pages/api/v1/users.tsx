@@ -1,7 +1,7 @@
 import {NextApiHandler} from "next";
 import { User } from "src/entity/User";
 import {IFormMsg} from "../../sign_up";
-import {connectionDatabase} from "../../../lib/handleDatabaseConnection";
+import {connectionDatabase} from "../../../src/lib/handleDatabaseConnection";
 import {AppDataSource} from "../../../src/data-source";
 type IErrors = {
     username: string[],

@@ -1,4 +1,4 @@
-import { connectionDatabase } from "lib/handleDatabaseConnection";
+import { connectionDatabase } from "src/lib/handleDatabaseConnection";
 import {GetServerSideProps, NextPage} from "next";
 import {AppDataSource} from "../../src/data-source";
 import {Post} from "../../src/entity/Post";

@@ -3,7 +3,7 @@ import {getPosts} from "../../../lib/posts";
 import {NextApiRequestSession} from "../../../types/base";
 import {User} from "../../../src/entity/User";
 import {Post} from "../../../src/entity/Post";
-import {connectionDatabase} from "../../../lib/handleDatabaseConnection";
+import {connectionDatabase} from "../../../src/lib/handleDatabaseConnection";
 import {AppDataSource} from "../../../src/data-source";
 import {withSessionAPI} from "../../../lib/withSession";
 

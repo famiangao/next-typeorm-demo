@@ -1,7 +1,7 @@
 import {User} from "../entity/User";
 import {AppDataSource} from "../data-source";
 import md5 from "md5";
-import {connectionDatabase} from "../../lib/handleDatabaseConnection";
+import {connectionDatabase} from "../lib/handleDatabaseConnection";
 export type IErrors={
     username:string[],
     password:string[]
