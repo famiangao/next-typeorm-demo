@@ -20,5 +20,4 @@ AppDataSource.initialize().then(async ()=>{
 
     await AppDataSource.destroy();//销毁连接
     console.log('OK!')
-
 })

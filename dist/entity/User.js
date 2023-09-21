@@ -16,9 +16,11 @@ var _initializerWarningHelper2 = _interopRequireDefault(require("@babel/runtime/
 var _typeorm = require("typeorm");
 var _Post = require("./Post");
 var _Comment = require("./Comment");
+var _handleDatabaseConnection = require("../../lib/handleDatabaseConnection");
 var _md = _interopRequireDefault(require("md5"));
 var _lodash = _interopRequireDefault(require("lodash"));
-var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7; // import {connectionDatabase} from "../../lib/handleDatabaseConnection";
+var _dataSource = require("../data-source");
+var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7;
 var User = (_dec = (0, _typeorm.Entity)('users'), _dec2 = (0, _typeorm.PrimaryGeneratedColumn)("increment"), _dec3 = (0, _typeorm.Column)("varchar"), _dec4 = (0, _typeorm.Column)("varchar"), _dec5 = (0, _typeorm.CreateDateColumn)(), _dec6 = (0, _typeorm.UpdateDateColumn)(), _dec7 = (0, _typeorm.OneToMany)(function () {
   return _Post.Post;
 }, function (post) {
@@ -51,15 +53,43 @@ var User = (_dec = (0, _typeorm.Entity)('users'), _dec2 = (0, _typeorm.PrimaryGe
     key: "validate",
     value: function () {
       var _validate = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
+        var sameNameUser;
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                _context.next = 2;
+                return (0, _handleDatabaseConnection.connectionDatabase)();
+              case 2:
+                _context.next = 4;
+                return _dataSource.AppDataSource.manager.find(User, {
+                  where: {
+                    username: this.username
+                  }
+                });
+              case 4:
+                sameNameUser = _context.sent;
+                if (sameNameUser.length != 0) {
+                  this.errors.username.push("用户名重复");
+                }
+                if (this.username.trim() === "") {
+                  this.errors.username.push("用户名不能为空");
+                }
+                if (!this.password) {
+                  this.errors.password.push("密码不能为空");
+                }
+                if (!/[a-z]|[0-9]|[A-Z]/.test(this.password)) {
+                  this.errors.password.push("格式不合法");
+                }
+                if (this.password != this.passwordConfirmation) {
+                  this.errors.passwordConfirmation.push("密码不匹配");
+                }
+              case 10:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee);
+        }, _callee, this);
       }));
       function validate() {
         return _validate.apply(this, arguments);

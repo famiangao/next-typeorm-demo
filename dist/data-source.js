@@ -6,9 +6,14 @@ Object.defineProperty(exports, "__esModule", {
 exports.dataSourceConfig2 = exports.dataSourceConfig = exports.AppDataSource = void 0;
 require("reflect-metadata");
 var _typeorm = require("typeorm");
+var process = _interopRequireWildcard(require("process"));
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+var DEVELOPMENT_ID = "192.168.1.179";
+var PRODUCTION_ID = "localhost";
 var dataSourceConfig = {
   type: "postgres",
-  host: "192.168.1.179",
+  host: process.env.NODE_ENV === 'production' ? PRODUCTION_ID : DEVELOPMENT_ID,
   port: 5432,
   username: "blog",
   password: "",

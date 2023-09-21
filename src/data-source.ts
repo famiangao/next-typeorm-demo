@@ -1,13 +1,11 @@
 import "reflect-metadata"
 import {DataSource, DataSourceOptions} from "typeorm"
-import {Post} from "./entity/Post";
-import {User} from "./entity/User";
-import {Comment} from "./entity/Comment";
-
-
+import * as process from "process";
+const DEVELOPMENT_ID="192.168.1.179"
+const PRODUCTION_ID="localhost"
 export const dataSourceConfig: DataSourceOptions={
     type: "postgres",
-    host: "localhost",
+    host: process.env.NODE_ENV==='production'?PRODUCTION_ID:DEVELOPMENT_ID,
     port: 5432,
     username: "blog",
     password: "",

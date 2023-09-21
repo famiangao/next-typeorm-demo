@@ -28,6 +28,13 @@ docker exec -it next-postgres-container bash
 psql -U blog -W
 
 ```
+创建数据库
+```
+docker exec -it <id> bash
+psql -U blog
+CREATE DATABASE blog_development ENCODING 'UTF8' LC_COLLATE 'en_US.utf8' LC_CTYPE 'en_US.utf8';
+```
+
 sql命令
 ```
  \l                    //查看所有数据库 (list database)

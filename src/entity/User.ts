@@ -14,7 +14,6 @@ import {connectionDatabase} from "../../lib/handleDatabaseConnection";
 import md5 from 'md5';
 import _ from 'lodash';
 import {AppDataSource} from "../data-source";
-import {useForm} from "../../hooks/useForm";
 
 @Entity('users')
 export class User {
