@@ -1,7 +1,8 @@
 import "reflect-metadata"
 import {DataSource, DataSourceOptions} from "typeorm"
 import * as process from "process";
-const DEVELOPMENT_ID="192.168.1.179"
+// const DEVELOPMENT_ID="192.168.1.179"
+const DEVELOPMENT_ID="localhost"
 const PRODUCTION_ID="localhost"
 export const dataSourceConfig: DataSourceOptions={
     type: "postgres",
