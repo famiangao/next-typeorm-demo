@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # 应该是不需要install的，因为你build了
-# RUN yarn install
+RUN yarn install
 
 
 # If you are building your code for production
