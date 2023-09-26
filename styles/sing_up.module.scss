@@ -1,0 +1,10 @@
+.main {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  background-color: #eaf4f8;
+  .content {
+    width: 50%;
+    padding-top: 5%;
+  }
+}

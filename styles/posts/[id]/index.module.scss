@@ -1,0 +1,19 @@
+.wrapper {
+  max-width: 800px;
+  margin: 16px auto;
+  padding: 0 16px;
+}
+
+.title {
+  font-size: 40px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #666;
+  color: #0969da;
+  font-weight: bold;
+}
+.actions > *{
+  margin: 4px;
+}
+.actions > *:first-child{
+  margin-left: 0;
+}

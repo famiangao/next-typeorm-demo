@@ -1,0 +1,24 @@
+
+.cover {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  //background-image:url("../public/homeBg.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-color: #eaf4f8;
+  .title {
+    font-size: 30px;
+  }
+  img {
+    width: 120px;
+    height: 120px;
+  }
+  p {
+    padding: 10px;
+  }
+}
+

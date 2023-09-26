@@ -1,11 +1,11 @@
 import Link from "next/link";
 import {GetServerSideProps, GetServerSidePropsContext, NextPage} from "next";
 import {Post} from "../../src/entity/Post";
-import {AppDataSource, dataSourceConfig} from "../../src/data-source";
-import {createConnection} from "typeorm/browser";
+import {AppDataSource} from "../../src/data-source";
 import {connectionDatabase} from "../../src/lib/handleDatabaseConnection";
 import {usePager} from "../../hooks/usePager";
 //import usePosts from "../hooks/usePosts";//这个方法是从axios内渲染出来的内容
+import styles from "../../styles/posts/index.module.scss"
 
 type IHomeProp = {
     posts: Post[],
@@ -14,6 +14,8 @@ type IHomeProp = {
     postCount:number
 
 }
+
+const PAGE_COUNT=3;
 ///客户端渲染的内容
 const Home: NextPage<IHomeProp> = (props) => {
     let {posts} = props;
@@ -26,14 +28,14 @@ const Home: NextPage<IHomeProp> = (props) => {
         }
     })
     return (
-        <div>
-            <div>文章标题</div>
-            <br/>
-            <div>
+        <div className={styles.main_container}>
+            <div className={styles.title}>文章列表</div>
+            <hr/>
+            <div className={styles.content}>
                 {
                     posts.map((el) => {
                         return (
-                            <div key={el.id}>
+                            <div key={el.id} className={styles.content_bar}>
                                 {el.title}：
                                 <Link href={`/posts/${el.id}`}>
                                     {el.title}
@@ -43,9 +45,12 @@ const Home: NextPage<IHomeProp> = (props) => {
                     })
                 }
             </div>
-            <div>{
-                pager
-            }</div>
+            {
+                props.maxPage>1&&
+                <div>{
+                    pager
+                }</div>
+            }
         </div>
     )
 }
@@ -56,7 +61,6 @@ export const getServerSideProps: GetServerSideProps = async (context:GetServerSi
 
     //现在页面有一个传参了，page=x。设置一页几个和一共几页
     // console.log(context.query.page);//获取到当前的查询参数
-    const PAGE_COUNT=3;
     const pageNumber=Number(context.query.page)||1;
     await connectionDatabase();
     let posts=await AppDataSource.manager.findAndCount(Post,{

@@ -1,8 +1,7 @@
 import {NextPage} from "next";
-import {useState} from "react";
 import axios from '../lib/axios';
-import {IErrors} from "./api/v1/users";
 import {useForm} from "../hooks/useForm";
+import styles from "../styles/sing_in.module.scss"
 
 type IProps = {}
 export type IFormMsg = {
@@ -13,35 +12,36 @@ export type IFormMsg = {
 const signUp: NextPage<IProps> = (props) => {
 
 
-    let {Form}=useForm<IFormMsg>({
-        formContent:[
-            {labelName:"用户名",useKey:"username",inputType:"text"},
-            {labelName:"密码",useKey:"password",inputType:"password"},
-            {labelName:"确定密码",useKey:"passwordConfirmation",inputType:"password"},
+    let {Form} = useForm<IFormMsg>({
+        formContent: [
+            {labelName: "用户名", useKey: "username", inputType: "text"},
+            {labelName: "密码", useKey: "password", inputType: "password"},
+            {labelName: "确定密码", useKey: "passwordConfirmation", inputType: "password"},
         ],
-        data:{
-            username:"",
-            password:"",
-            passwordConfirmation:""
+        data: {
+            username: "",
+            password: "",
+            passwordConfirmation: ""
         },
-        submitOptions:{
-            successWord:"注册成功",
-            axiosFn:(formData)=>{
-                return  axios.post("/api/v1/users", formData)
+        submitOptions: {
+            successWord: "注册成功",
+            axiosFn: (formData) => {
+                return axios.post("/api/v1/users", formData)
             },
-            successCallback:()=>{
-                window.location.href="/sign_in"
+            successCallback: () => {
+                window.location.href = "/sign_in"
             }
         }
     })
 
     return (
-        <div>
-            <h1>注册</h1>
-            <div>
-                {Form}
+        <div className={styles.main}>
+            <div className={styles.content}>
+                <h1>注册</h1>
+                <div>
+                    {Form}
+                </div>
             </div>
-
         </div>
     )
 }
