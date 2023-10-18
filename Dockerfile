@@ -16,7 +16,7 @@ COPY package*.json ./
 # Bundle app source
 COPY . .
 
-# RUN npm run docker:build
+RUN npm run docker:build
 # 暴漏端口
 EXPOSE 3000
 # 配置启动命令
