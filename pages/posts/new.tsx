@@ -5,6 +5,7 @@ import {connectionDatabase} from "../../src/lib/handleDatabaseConnection";
 import {AppDataSource} from "../../src/data-source";
 import {Post} from "../../src/entity/Post";
 import {useRouter} from "next/router";
+import {useLogin} from "../../hooks/useLogin";
 
 interface  IFormMsg{
     title:string,
@@ -18,6 +19,7 @@ const New:NextPage<{edit:IEdit}>=(props)=>{
     let title="";
     let content="";
     const router = useRouter()
+    let loginBar=useLogin();
     if(props.edit.isEdit&&props.edit.post){
         title=props.edit.post.title
         content=props.edit.post.content
@@ -53,6 +55,7 @@ const New:NextPage<{edit:IEdit}>=(props)=>{
     })
     return (
         <div className="postsNew">
+            {loginBar}
             <div className="form-wrapper">
                 {Form}
             </div>

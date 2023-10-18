@@ -28,6 +28,7 @@ const postShow: NextPage<IProps> = (props) => {
     const onEdit=useCallback( async ()=>{
         await  router.push(`/posts/new?editId=${props.id}`)
     },[props.id])
+    console.log(props.currentUser);
     return (
         <div>
             <div className={styles.wrapper}>

@@ -1,8 +1,12 @@
 import {NextPage} from 'next';
-import Link from 'next/link';
 import styles from "../styles/index.module.scss"
+import {useRouter} from "next/router";
 
 const Home: NextPage = () => {
+    const router = useRouter()
+    let handleClick=async ()=>{
+        await router.push("/posts/show")
+    }
     return (
         <>
             <div className={styles.cover}>
@@ -11,7 +15,7 @@ const Home: NextPage = () => {
                 </div>
                 <div className={styles.title}>杜婉鑫的个人博客</div>
                 <p>靡不有初，鲜克有终</p>
-                <p><Link href="/posts/show">文章列表</Link></p>
+                <p onClick={handleClick} className={styles.entry}>进入博客</p>
             </div>
         </>
     );

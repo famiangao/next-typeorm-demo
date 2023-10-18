@@ -2,6 +2,7 @@ import {NextPage} from "next";
 import axios from '../lib/axios';
 import {useForm} from "../hooks/useForm";
 import styles from "../styles/sing_in.module.scss"
+import Link from "next/link";
 
 type IProps = {}
 export type IFormMsg = {
@@ -41,6 +42,7 @@ const signUp: NextPage<IProps> = (props) => {
                 <div>
                     {Form}
                 </div>
+                <div className={styles.sign_up}>返回登录:<Link href="/sign_in">登录</Link></div>
             </div>
         </div>
     )

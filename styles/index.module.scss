@@ -20,5 +20,17 @@
   p {
     padding: 10px;
   }
+  .entry{
+    margin-top: 20px;
+    padding: 5px 90px;
+    border: solid 1px #0f2d31;
+    border-radius: 10px;
+    background-color: #d6e3e9;
+    cursor: pointer;
+    &:hover{
+      background-color: #32545e;
+      color: #d6e3e9;
+    }
+  }
 }
 

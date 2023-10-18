@@ -1,0 +1,27 @@
+.main{
+  padding: 20px;
+  background-color: #d6e3e9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .left{
+    display: flex;
+    .link{
+      margin-right: 10px;
+      &:hover{
+        color: #0969da;
+        cursor: pointer;
+      }
+    }
+  }
+  .right{
+    display: flex;
+    .user_name{
+      padding-right: 10px;
+    }
+    .login{
+
+    }
+
+  }
+}

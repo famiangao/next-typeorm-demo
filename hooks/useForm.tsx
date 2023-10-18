@@ -31,7 +31,6 @@ function useForm<T>(options: IOptions<T>) {
         initError[item as keyof T] = [];
     })
     const [errors, setErrors] = useState(initError)
-    console.log(formData);
     const Form = (
         <div className={styles.main}>
             {
@@ -73,7 +72,6 @@ function useForm<T>(options: IOptions<T>) {
                     //点击后需要验证是否合规，是否有错，然后返回数据
                     // console.log(submitOptions.axiosFn(formData))
                     submitOptions.axiosFn(formData).then((res) => {
-                        console.log(res);
                         setErrors(initError);
                         alert(submitOptions.successWord)
                         submitOptions.successCallback(res)

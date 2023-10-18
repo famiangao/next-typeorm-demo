@@ -6,6 +6,7 @@ import {connectionDatabase} from "../../src/lib/handleDatabaseConnection";
 import {usePager} from "../../hooks/usePager";
 //import usePosts from "../hooks/usePosts";//这个方法是从axios内渲染出来的内容
 import styles from "../../styles/posts/index.module.scss"
+import {useLogin} from "../../hooks/useLogin";
 
 type IHomeProp = {
     posts: Post[],
@@ -27,30 +28,34 @@ const Home: NextPage<IHomeProp> = (props) => {
             window.location.href=`${window.location.pathname}?page=${page}`
         }
     })
+    let loginBar=useLogin();
     return (
-        <div className={styles.main_container}>
-            <div className={styles.title}>文章列表</div>
-            <hr/>
-            <div className={styles.content}>
+        <div>
+            {loginBar}
+            <div className={styles.main_container}>
+                <div className={styles.title}>文章列表</div>
+                <hr/>
+                <div className={styles.content}>
+                    {
+                        posts.map((el) => {
+                            return (
+                                <div key={el.id} className={styles.content_bar}>
+                                    {el.title}：
+                                    <Link href={`/posts/${el.id}`}>
+                                        {el.title}
+                                    </Link>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
                 {
-                    posts.map((el) => {
-                        return (
-                            <div key={el.id} className={styles.content_bar}>
-                                {el.title}：
-                                <Link href={`/posts/${el.id}`}>
-                                    {el.title}
-                                </Link>
-                            </div>
-                        )
-                    })
+                    props.maxPage>1&&
+                    <div>{
+                        pager
+                    }</div>
                 }
             </div>
-            {
-                props.maxPage>1&&
-                <div>{
-                    pager
-                }</div>
-            }
         </div>
     )
 }

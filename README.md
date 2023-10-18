@@ -32,8 +32,8 @@ psql -U blog -W
 ```
 docker exec -it <id> bash
 psql -U blog
-CREATE DATABASE blog_development ENCODING 'UTF8' LC_COLLATE 'en_US.utf8' LC_CTYPE 'en_US.utf8';
-```
+
+```CREATE DATABASE blog_development ENCODING 'UTF8' LC_COLLATE 'en_US.utf8' LC_CTYPE 'en_US.utf8';
 
 sql命令
 ```
