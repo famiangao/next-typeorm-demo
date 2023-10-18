@@ -9,6 +9,7 @@ import {User} from "../../src/entity/User";
 import {useCallback} from "react";
 import axios from "../../lib/axios";
 import {useRouter} from 'next/router';
+import {useLogin} from "../../hooks/useLogin";
 
 type IProps = {
     id: number;
@@ -17,6 +18,7 @@ type IProps = {
 }
 const postShow: NextPage<IProps> = (props) => {
     const router = useRouter()
+    let loginBar=useLogin();
     const onRemove = useCallback(() => {
         axios.delete(`/api/v1/posts/${props.id}`).then(async () => {
             window.alert('删除成功');
@@ -31,6 +33,7 @@ const postShow: NextPage<IProps> = (props) => {
     console.log(props.currentUser);
     return (
         <div>
+            {loginBar}
             <div className={styles.wrapper}>
                 <header>
                     <div className={styles.title}>{props.post.title}</div>
