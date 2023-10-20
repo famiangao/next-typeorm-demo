@@ -1,14 +1,16 @@
 ////这是一个封装全部表单结构的hook
-import {useState} from "react";
+import {Dispatch, useEffect, useState} from "react";
 import {AxiosError, AxiosResponse} from "axios";
 import {IErrors} from "../src/model/SignIn";
 import cs from 'classnames';
 import styles from "../styles/hooks/useForm.module.scss"
+import "vditor/dist/index.css";
+import Vditor from "vditor";
 
 interface IFormContent<T> {
     labelName: string,
     useKey: keyof T,
-    inputType: "text" | "password" | "textarea",
+    inputType: "text" | "password" | "textarea" | "vditor",
     className?: string;
 }
 
@@ -30,7 +32,26 @@ function useForm<T>(options: IOptions<T>) {
     Object.keys(data).forEach((item) => {
         initError[item as keyof T] = [];
     })
-    const [errors, setErrors] = useState(initError)
+    const [errors, setErrors] = useState(initError);
+
+
+    useEffect(()=>{
+        formContent.forEach(el=>{
+            if(el.inputType==="vditor"){
+                let vditor = new Vditor(el.useKey.toString(), {
+                    after: () => {
+                        console.log(formData[el.useKey],formData);
+                        vditor.setValue(formData[el.useKey].toString()||"    ");
+                        // setVd(vditor);
+                    }
+                });
+                setFormData({
+                    ...formData,
+                    [el.useKey]:vditor
+                })
+            }
+        })
+    },[])
     const Form = (
         <div className={styles.main}>
             {
@@ -39,27 +60,12 @@ function useForm<T>(options: IOptions<T>) {
                         <div key={item.useKey.toString()}
                              className={cs(styles.field, `field-${item.useKey.toString()}`, item.className)}
                         >
-                            <label className={styles.label}>
+                            <div className={styles.label}>
                                 <span className={styles.label_text}>
                                     {item.labelName}
                                 </span>
-                                {item.inputType === "textarea" ?
-                                    <textarea  className={styles.control} value={formData[item.useKey].toString()} onChange={(event) => {
-                                        setFormData({
-                                            ...formData,
-                                            [item.useKey]: event.target.value
-                                        })
-                                    }
-                                    }></textarea> :
-                                    <input className={styles.control} value={formData[item.useKey].toString()} type={item.inputType}
-                                           onChange={(event) => {
-                                               setFormData({
-                                                   ...formData,
-                                                   [item.useKey]: event.target.value
-                                               })
-                                           }}/>
-                                }
-                            </label>
+                                <GetInput item={item} formData={formData} setFormData={setFormData}></GetInput>
+                            </div>
                             {/*{JSON.stringify(errors)+item.useKey}*/}
                             <div>{errors[item.useKey]?.length !== 0 && errors[item.useKey]?.join(" ")}</div>
                         </div>
@@ -87,6 +93,45 @@ function useForm<T>(options: IOptions<T>) {
     return {
         Form,
     }
+}
+
+function GetInput({item,formData,setFormData}: {
+    item: IFormContent<any>,
+    formData: any,
+    setFormData: Dispatch<any>
+}) {
+    let result = (
+        <>
+        </>
+    )
+    if (item.inputType === "textarea") {
+        result = (
+            <textarea className={styles.control} value={formData[item.useKey].toString()} onChange={(event) => {
+                setFormData({
+                    ...formData,
+                    [item.useKey]: event.target.value
+                })
+            }
+            }></textarea>
+        )
+    } else if (item.inputType == "vditor") {
+        result = (
+            <div className={styles.control}>
+                <div id={item.useKey.toString()} />
+            </div>
+        )
+    } else {
+        result = (
+            <input className={styles.control} value={formData[item.useKey].toString()} type={item.inputType}
+                   onChange={(event) => {
+                       setFormData({
+                           ...formData,
+                           [item.useKey]: event.target.value
+                       })
+                   }}/>
+        )
+    }
+    return result;
 }
 
 export {useForm};

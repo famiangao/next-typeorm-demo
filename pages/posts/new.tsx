@@ -6,53 +6,63 @@ import {AppDataSource} from "../../src/data-source";
 import {Post} from "../../src/entity/Post";
 import {useRouter} from "next/router";
 import {useLogin} from "../../hooks/useLogin";
+import Vditor from "vditor";
 
-interface  IFormMsg{
-    title:string,
-    content:string
+interface IFormMsg {
+    title: string,
+    content: Vditor|string
 }
-interface IEdit{
-    isEdit:boolean,
-    post?:Post
+
+interface IEdit {
+    isEdit: boolean,
+    post?: Post
 }
-const New:NextPage<{edit:IEdit}>=(props)=>{
-    let title="";
-    let content="";
+
+const New: NextPage<{ edit: IEdit }> = (props) => {
+    let title = "";
+    let content = "";
     const router = useRouter()
-    let loginBar=useLogin();
-    if(props.edit.isEdit&&props.edit.post){
-        title=props.edit.post.title
-        content=props.edit.post.content
+    let loginBar = useLogin();
+    if (props.edit.isEdit && props.edit.post) {
+        title = props.edit.post.title
+        content = props.edit.post.content
     }
 
-    let {Form}=useForm<IFormMsg>({
-        formContent:[
-            {labelName:"标题",useKey:"title",inputType:"text"},
-            {labelName:"内容",useKey:"content",inputType:"textarea"},
+    let {Form} = useForm<IFormMsg>({
+        formContent: [
+            {labelName: "标题", useKey: "title", inputType: "text"},
+            {labelName: "内容", useKey: "content", inputType: "vditor"},
         ],
-        data:{
+        data: {
             title,
             content
         },
-        submitOptions:{
-            successWord:props.edit.isEdit?"修改成功":"发布成功",
-            axiosFn:(formData)=>{
-                if(props.edit.isEdit){
-                    return axios.patch(`/api/v1/posts/${props.edit.post.id}`, {
-                        ...props.edit.post,
-                        title:formData.title,
-                        content:formData.content,
-                    })
+        submitOptions: {
+            successWord: props.edit.isEdit ? "修改成功" : "发布成功",
+            axiosFn: (formData) => {
+                console.log(formData.content);
+                if(typeof formData.content !=="string"){
 
-                }else{
-                    return axios.post("/api/v1/posts", formData)
+                    if (props.edit.isEdit) {
+                        return axios.patch(`/api/v1/posts/${props.edit.post.id}`, {
+                            ...props.edit.post,
+                            title: formData.title,
+                            content: formData.content.getValue(),
+                        })
+
+                    } else {
+                        return axios.post("/api/v1/posts", {
+                            ...formData,
+                            content: formData.content.getValue(),
+                        })
+                    }
                 }
             },
-            successCallback:async ()=>{
-                await  router.push(`/posts/show`)
+            successCallback: async () => {
+                await router.push(`/posts/show`)
             }
         }
-    })
+    });
     return (
         <div className="postsNew">
             {loginBar}
@@ -84,24 +94,24 @@ const New:NextPage<{edit:IEdit}>=(props)=>{
     );
 }
 export default New;
-export const getServerSideProps: GetServerSideProps =async (context)=>{
-    let editId=context.query.editId
-    let edit:IEdit={
-        isEdit:false
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    let editId = context.query.editId
+    let edit: IEdit = {
+        isEdit: false
     }
-    if(editId){
+    if (editId) {
         await connectionDatabase();
-        let post=await AppDataSource.manager.findOne(Post,{
-            where:{
-                id:Number(editId.toString())
+        let post = await AppDataSource.manager.findOne(Post, {
+            where: {
+                id: Number(editId.toString())
             }
         })
-        edit.isEdit=true;
-        edit.post=post;
+        edit.isEdit = true;
+        edit.post = post;
     }
     return {
-        props:{
-            edit:JSON.parse(JSON.stringify(edit))
+        props: {
+            edit: JSON.parse(JSON.stringify(edit))
         }
     }
 

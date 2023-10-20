@@ -36,7 +36,8 @@
     "sass": "^1.66.1",
     "scss": "^0.2.4",
     "typeorm": "^0.3.17",
-    "typescript": "5.2.2"
+    "typescript": "5.2.2",
+    "vditor": "^3.9.6"
   },
   "devDependencies": {
     "@babel/cli": "^7.22.15",
