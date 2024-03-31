@@ -1,11 +1,19 @@
 这是一个用来学习next的练习项目，最终将完成一个博客后台系统
 ## 运行代码
 ```bash
-npm i 
+pnpm i 
 npm run dev
 ```
 
 ## 知识点
+pages 下是next相关的内容
+src   下是typeorm相关内容
+
+
+如果在页面渲染之前获取的信息可以使用服务端渲染，就不用使用axios，直接调用typeorm api就可以了。
+如果是页面的交互就需要使用 axios请求，请求api/v1 文件下的接口了。
+
+然后 api/v1 下的请求还分为get/post/delet/put请求
 
 ### 运行项目
 
@@ -35,6 +43,8 @@ psql -U blog
 
 ```CREATE DATABASE blog_development ENCODING 'UTF8' LC_COLLATE 'en_US.utf8' LC_CTYPE 'en_US.utf8';
 
+```
+
 sql命令
 ```
  \l                    //查看所有数据库 (list database)
@@ -52,6 +62,18 @@ docker build . -t seven/node-web-app  //把当前目录按照Dockerfile打包
 docker run -p 3000:3000 -d seven/node-web-app  //根据镜像启动一个容器
 
 ````
+### 把代码同步到云上的步骤
+1. 登录云服务器
+2. 到项目的对应目录
+3. git pull 代码
+4. 运行pnpm i 下载更新以来
+5. docker ps 查看镜像
+6. docker rm xxx 删除上次的镜像/或者 docker stop xxx 停止对应镜像
+7. 打包
+```
+docker build . -t seven/node-web-app  //把当前目录按照Dockerfile打包
+docker run -p 3000:3000 -d seven/node-web-app  //根据镜像启动一个容器
+```
 
 
 ### js知识 
@@ -73,6 +95,7 @@ window.location.search    //查询参数    ?back=/posts/new
 ````
 
 页面跳转
+
 ````
 window.location.href=`/sign_in?back=${window.location.pathname}`   
 ///用半路径的方式，浏览器会自动拼接当前的域名和端口号

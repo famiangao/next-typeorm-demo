@@ -1,16 +1,17 @@
-import {GetServerSideProps, NextPage} from "next";
-import {useForm} from "../../hooks/useForm";
+import { GetServerSideProps, NextPage } from "next";
+import { useForm } from "../../hooks/useForm";
 import axios from '../../lib/axios';
-import {connectionDatabase} from "../../src/lib/handleDatabaseConnection";
-import {AppDataSource} from "../../src/data-source";
-import {Post} from "../../src/entity/Post";
-import {useRouter} from "next/router";
-import {useLogin} from "../../hooks/useLogin";
+import { connectionDatabase } from "../../src/lib/handleDatabaseConnection";
+import { AppDataSource } from "../../src/data-source";
+import { Post } from "../../src/entity/Post";
+import { useRouter } from "next/router";
+import { useLogin } from "../../hooks/useLogin";
 import Vditor from "vditor";
+import Layout from '../../components/Layout'
 
 interface IFormMsg {
     title: string,
-    content: Vditor|string
+    content: Vditor | string
 }
 
 interface IEdit {
@@ -28,10 +29,10 @@ const New: NextPage<{ edit: IEdit }> = (props) => {
         content = props.edit.post.content
     }
 
-    let {Form} = useForm<IFormMsg>({
+    let { Form } = useForm<IFormMsg>({
         formContent: [
-            {labelName: "标题", useKey: "title", inputType: "text"},
-            {labelName: "内容", useKey: "content", inputType: "vditor"},
+            { labelName: "标题", useKey: "title", inputType: "text" },
+            { labelName: "内容", useKey: "content", inputType: "editor" },
         ],
         data: {
             title,
@@ -40,39 +41,39 @@ const New: NextPage<{ edit: IEdit }> = (props) => {
         submitOptions: {
             successWord: props.edit.isEdit ? "修改成功" : "发布成功",
             axiosFn: (formData) => {
-                console.log(formData.content);
-                if(typeof formData.content !=="string"){
+                console.log('formData', formData)
 
-                    if (props.edit.isEdit) {
-                        return axios.patch(`/api/v1/posts/${props.edit.post.id}`, {
-                            ...props.edit.post,
-                            title: formData.title,
-                            content: formData.content.getValue(),
-                        })
+                if (props.edit.isEdit) {
+                    return axios.patch(`/api/v1/posts/${props.edit.post.id}`, {
+                        ...props.edit.post,
+                        title: formData.title,
+                        content: formData.content,
+                    })
 
-                    } else {
-                        return axios.post("/api/v1/posts", {
-                            ...formData,
-                            content: formData.content.getValue(),
-                        })
-                    }
+                } else {
+                    return axios.post("/api/v1/posts", {
+                        ...formData,
+                    })
                 }
             },
             successCallback: async () => {
-                await router.push(`/posts/show`)
+                await router.push(`/posts`)
+            },
+            cancelCallback:async ()=>{
+                await router.push(`/posts`)
             }
         }
     });
     return (
         <div className="postsNew">
             {loginBar}
-            <div className="form-wrapper">
+            <Layout className="form-wrapper">
                 {Form}
-            </div>
+            </Layout>
             <style jsx global>{`
-              .form-wrapper {
-                padding: 16px;
-              }
+            //   .form-wrapper {
+            //     padding: 16px;
+            //   }
 
               .postsNew .field-content textarea {
                 height: 20em;

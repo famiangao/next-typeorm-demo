@@ -15,6 +15,7 @@ import md5 from 'md5';
 import _ from 'lodash';
 import {AppDataSource} from "../data-source";
 
+//封装了对应表 和 这个表中一些基本的方法 validate existErrors 就是这个表的基本方法
 @Entity('users')
 export class User {
     @PrimaryGeneratedColumn("increment")

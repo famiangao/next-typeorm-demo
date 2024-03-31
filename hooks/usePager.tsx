@@ -24,7 +24,7 @@ export const usePager = (options: IOptions) => {
         last.push(now);
         return last;
     }, [])
-    let pager = (
+    const pager = (
         <div className="wrapper">
             {currentPage>1&&
                 <span className="arrow" onClick={() => {

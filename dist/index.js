@@ -17,5 +17,5 @@ _dataSource.AppDataSource.initialize().then( /*#__PURE__*/(0, _asyncToGenerator2
     }
   }, _callee);
 })))["catch"](function (error) {
-  return console.log(error);
+ console.log(error);
 });

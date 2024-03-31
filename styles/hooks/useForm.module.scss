@@ -1,5 +1,5 @@
 .field {
-  margin: 8px 0;
+  padding: 8px 0;
 }
 
 .label {
@@ -14,22 +14,17 @@
   }
 
   .control {
+  }
+  .editor{
     width: 100%;
   }
-
-  input {
-    height: 32px;
-  }
+ 
 }
 
-.main {
-  //margin: 20px 100px 20px 0px;
-}
 .btn_container{
-  //text-align: center;
-  margin-top: 15px;
+  margin-top: 20px;
   button{
-    width: 50px;
-    height: 30px;
+    padding: 3px 50px;
+    margin-right: 20px;
   }
 }

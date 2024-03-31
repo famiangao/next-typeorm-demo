@@ -1,35 +1,40 @@
-
-.cover {
+@import "./theme.module.scss";
+.coverContainer{
   height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  //background-image:url("../public/homeBg.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-attachment: fixed;
-  background-color: #eaf4f8;
-  .title {
-    font-size: 30px;
-  }
-  img {
-    width: 120px;
-    height: 120px;
-  }
-  p {
-    padding: 10px;
-  }
-  .entry{
-    margin-top: 20px;
-    padding: 5px 90px;
-    border: solid 1px #0f2d31;
-    border-radius: 10px;
-    background-color: #d6e3e9;
-    cursor: pointer;
-    &:hover{
-      background-color: #32545e;
-      color: #d6e3e9;
+  width: 100vw;
+  .cover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 20%;
+    margin: auto;
+    width: 417px;
+    height: 249px;
+    background-color: #ffffff;
+    border: 1px solid $week-black;
+    .title {
+      font-size: 30px;
+    }
+    .motto{
+      color:$week-black;
+    }
+    img {
+      width: 120px;
+      height: 120px;
+    }
+    p {
+      padding: 10px;
+    }
+    .entry{
+      margin-top: 20px;
+      padding: 5px 90px;
+      border: solid 1px $week-black;
+      cursor: pointer;
     }
   }
 }

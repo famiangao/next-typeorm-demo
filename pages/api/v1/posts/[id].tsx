@@ -12,7 +12,6 @@ const id:NextApiHandler=async (req, res)=>{
        let deleteResult=await AppDataSource.manager.delete(Post,{
            id:id,
        })
-       console.log(deleteResult);
        res.setHeader("Content-Type","application/json");
        if(deleteResult.affected>0){
             res.statusCode=200
@@ -22,7 +21,6 @@ const id:NextApiHandler=async (req, res)=>{
         res.end();
    }else if(req.method==="PATCH"){
        let post:Post =req.body as any
-       console.log(post);
        await connectionDatabase();
        res.setHeader("Content-Type","application/json");
        let result=await  AppDataSource.manager.update(Post,{id:post.id},post)

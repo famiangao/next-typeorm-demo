@@ -1,21 +1,8 @@
-
-
-// export function withSession(handler:NextApiHandler){
-//     return withIronSessionApiRoute(handler,{
-//         password:process.env.SECRET,
-//         cookieName:"blog",
-//         cookieOptions:{secure:false}
-//     })
-// }
+import { getIronSession } from "iron-session/edge";
 import { withIronSessionApiRoute, withIronSessionSsr  } from "iron-session/next";
-import {GetServerSideProps, GetServerSidePropsResult, NextApiHandler} from "next";
-import * as process from "process";
-
-const sessionOptions = {
-    password:process.env.SECRET,
-    cookieName:"blog",
-    cookieOptions:{secure:false}
-};
+import {GetServerSideProps, NextApiHandler} from "next";
+import { NextRequest, NextResponse } from "next/server";
+import { sessionOptions } from "utils/sessionOptions";
 
 export function withSessionSSR(handler:GetServerSideProps){
     return withIronSessionSsr(handler, sessionOptions)
@@ -23,4 +10,8 @@ export function withSessionSSR(handler:GetServerSideProps){
 
 export function withSessionAPI(handler:NextApiHandler) {
     return withIronSessionApiRoute(handler, sessionOptions)
+}
+
+export async function withSessionGet(req: NextRequest,res:NextResponse){
+    return await getIronSession(req,res,sessionOptions)
 }

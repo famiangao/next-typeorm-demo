@@ -1,11 +1,15 @@
+@import "../theme.module.scss";
+$top-padding:15px;
 .main{
-  padding: 20px;
-  background-color: #d6e3e9;
+  padding-top: $top-padding;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid $week-black;
+  background-color: #fff;
   .left{
     display: flex;
+    padding-left: $top-padding;
     .link{
       margin-right: 10px;
       &:hover{
@@ -13,14 +17,27 @@
         cursor: pointer;
       }
     }
+    :global{
+      .ant-menu{
+        font-size: 18px;
+      }
+    }
   }
   .right{
-    display: flex;
+    padding-right: $top-padding;
+    .login{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .welcome{
+        margin-right: 10px;
+      }
+    }
     .user_name{
       padding-right: 10px;
     }
-    .login{
-
+    .loginBtn{
+      margin-right: 10px;
     }
 
   }

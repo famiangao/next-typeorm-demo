@@ -19,6 +19,8 @@ export const dataSourceConfig: DataSourceOptions={
     migrations: ['dist/migration/**/*.js'],
     subscribers: ['dist/subscriber/**/*.js'],
 }
+
+///也可以用2，只不过2 不经过babel转换，而typeorm转换ts用的是ts-node 和next转换ts的方法不同，可能会出现问题
 export const dataSourceConfig2: DataSourceOptions={
     type: "postgres",
     host: "192.168.1.179",

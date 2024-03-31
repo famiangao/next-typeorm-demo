@@ -1,0 +1,67 @@
+.main{
+    width: 500px;
+    height: 200px;
+    position: absolute;
+    font-size: 30px;
+    top: 25%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: #5b5b5b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #fff;
+    animation: appear 2s cubic-bezier(0.41, -0.34, 0, 1.8);
+    .detail{
+        font-size: 16px;
+        color: #c2c2c2;
+        margin-top: 20px;
+        animation: detailsAnim 2s cubic-bezier(0.41, -0.34, 0, 1.8);
+    }
+}
+.back{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 500px;
+    height: 50px;
+    background-color: #e0dfdd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    &::after{
+        content: 'X__X';
+    }
+    &:hover{
+        background-color: #c8c8c8;
+        color: #000000;
+        &::after{
+            content: '^__^';
+        }
+    }
+}
+@keyframes appear {
+    from {
+        top: 0%;
+        font-size: 16px;
+        color: #5b5b5b;
+    }
+    to {
+        font-size: 30px;
+        top:25%;
+        color: #fff;
+    }
+}
+@keyframes detailsAnim {
+    from {
+        color: #5b5b5b;
+    }
+    to {
+        color: #c2c2c2;
+    }
+}

@@ -1,5 +1,4 @@
 import {NextApiHandler} from 'next';
-import {getPosts} from "../../../lib/posts";
 import {NextApiRequestSession} from "../../../types/base";
 import {User} from "../../../src/entity/User";
 import {Post} from "../../../src/entity/Post";
@@ -7,7 +6,7 @@ import {connectionDatabase} from "../../../src/lib/handleDatabaseConnection";
 import {AppDataSource} from "../../../src/data-source";
 import {withSessionAPI} from "../../../lib/withSession";
 
-//等于这个方法是用于给next接收post请求用的
+//新建文章的接口
 const Posts: NextApiHandler = async (req:NextApiRequestSession, res) => {
   let user:User=req.session.currentUser
   res.setHeader('Content-Type', 'application/json');
@@ -23,5 +22,5 @@ const Posts: NextApiHandler = async (req:NextApiRequestSession, res) => {
   res.write(JSON.stringify(post));
   res.end();
 };
-export default   withSessionAPI(Posts);
+export default  withSessionAPI(Posts);
 
